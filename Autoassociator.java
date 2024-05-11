@@ -3,15 +3,14 @@ public class Autoassociator {
 	private int trainingCapacity;
 	
 	public Autoassociator(CourseArray courses) {
-		// TO DO
-		// creates a new Hopfield network with the same number of neurons 
-		// as the number of courses in the input CourseArray
+		weights = new int[courses.length()][courses.length()];
+		trainingCapacity = (int) (0.1 * weights.length);
 	}
 	
 	public int getTrainingCapacity() {
 		// TO DO
 		
-		return 0;
+		return trainingCapacity;
 	}
 	
 	public void training(int pattern[]) {
