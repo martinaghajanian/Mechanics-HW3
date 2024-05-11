@@ -94,6 +94,7 @@ public class TimeTable extends JFrame implements ActionListener {
 			}
 			System.out.println("Shift = " + field[4].getText() + "\tMin clashes = " + min + "\tat step " + step);
 			setVisible(true);
+			courses.printSlotStatus();
 			break;
 		case 2:
 			courses.iterate(Integer.parseInt(field[4].getText()));
