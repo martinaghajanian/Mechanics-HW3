@@ -105,9 +105,6 @@ public class TimeTable extends JFrame implements ActionListener {
 				System.out.println(i + "\t" + courses.slot(i) + "\t" + courses.status(i));
 			break;
 		case 4:
-			min = Integer.MAX_VALUE;
-			step = 0;
-			
 			for (int iteration = 1; iteration <= Integer.parseInt(field[3].getText()); iteration++) {
 				courses.iterate(Integer.parseInt(field[4].getText()));
 				draw();
@@ -117,8 +114,6 @@ public class TimeTable extends JFrame implements ActionListener {
 					step = iteration;
 				}
 			}
-			System.out.println("Shift = " + field[4].getText() + "\tMin clashes = " + min + "\tat step " + step);
-			setVisible(true);
 			break;
 		case 5:
 			System.exit(0);
