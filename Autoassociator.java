@@ -27,8 +27,16 @@ public class Autoassociator {
 	
 	
 	public void unitUpdate(int neurons[], int index) {
-		// TO DO
-		// implements the update step of a single neuron specified by index
+		int sum = 0;
+		for (int i = 0; i < neurons.length; i++) {
+			sum += weights[index][1] * neurons [i];
+		}
+
+		if (sum >= 0) {
+			neurons[index] = 1;
+		} else {
+			neurons[index] = -1;
+		}
 	}
 
 	public int unitUpdate(int neurons[]) {
