@@ -1,6 +1,11 @@
+import java.util.Random;
+
+
 public class Autoassociator {
 	private int weights[][];
 	private int trainingCapacity;
+	private Random random = new Random();
+
 	
 	public Autoassociator(CourseArray courses) {
 		weights = new int[courses.length()][courses.length()];
@@ -20,17 +25,18 @@ public class Autoassociator {
 		}
 	}
 	
+	
+	public void unitUpdate(int neurons[], int index) {
+		// TO DO
+		// implements the update step of a single neuron specified by index
+	}
+
 	public int unitUpdate(int neurons[]) {
 		// TO DO
 		// implements a single update step and
 		// returns the index of the randomly selected and updated neuron
 		
 		return 0;
-	}
-	
-	public void unitUpdate(int neurons[], int index) {
-		// TO DO
-		// implements the update step of a single neuron specified by index
 	}
 	
 	public void chainUpdate(int neurons[], int steps) {
