@@ -96,6 +96,14 @@ public class CourseArray {
 		
 		return result;
 	}
+
+	public void printSlotStatus() {
+		int status[] = null;
+		for (int slot = 0; slot < period; slot++) {
+			status = slotStatus(slot);
+			System.out.println(slot + "\t" + status[0] + "\t" + status[1]);
+		}
+	}
 	
 	public void printResult() {
 		for (int i = 1; i < elements.length; i++)
