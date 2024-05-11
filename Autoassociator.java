@@ -4,12 +4,10 @@ public class Autoassociator {
 	
 	public Autoassociator(CourseArray courses) {
 		weights = new int[courses.length()][courses.length()];
-		trainingCapacity = (int) (0.1 * weights.length);
+		trainingCapacity = (int) (0.139 * weights.length);
 	}
 	
 	public int getTrainingCapacity() {
-		// TO DO
-		
 		return trainingCapacity;
 	}
 	
