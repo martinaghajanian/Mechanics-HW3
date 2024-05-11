@@ -32,11 +32,9 @@ public class Autoassociator {
 	}
 
 	public int unitUpdate(int neurons[]) {
-		// TO DO
-		// implements a single update step and
-		// returns the index of the randomly selected and updated neuron
-		
-		return 0;
+		int index = random.nextInt(neurons.length);
+		unitUpdate(neurons, index);
+		return index;
 	}
 	
 	public void chainUpdate(int neurons[], int steps) {
