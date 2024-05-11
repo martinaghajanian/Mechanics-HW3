@@ -38,7 +38,7 @@ public class Autoassociator {
 	}
 	
 	public void chainUpdate(int neurons[], int steps) {
-		for (let i = 0; i < steps; i++) {
+		for (int i = 0; i < steps; i++) {
 			unitUpdate(neurons);
 		}
 	}
