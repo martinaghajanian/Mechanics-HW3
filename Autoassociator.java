@@ -38,8 +38,6 @@ public class Autoassociator {
 	}
 	
 	public void chainUpdate(int neurons[], int steps) {
-		// TO DO
-		// implements the specified number od update steps
 		for (let i = 0; i < steps; i++) {
 			unitUpdate(neurons);
 		}
