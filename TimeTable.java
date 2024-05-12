@@ -118,12 +118,18 @@ public class TimeTable extends JFrame implements ActionListener {
 			break;
 		case 5:
 			Autoassociator autoAssociator = new Autoassociator(courses);
-			for (int i = 0; i < Integer.parseInt(field[0].getText()); i++) {
-				if (courses.slotStatus(i)[0] >= courses.length()/Integer.parseInt(field[0].getText()) &&  courses.slotStatus(i)[1] == 0){
 
-					// trains if the time slots in the current state, have zero clashes, 
+			int numOfSlots = Integer.parseInt(field[0].getText());
+
+			for (int i = 0; i < numOfSlots; i++) {
+
+				int numOfCourses = courses.slotStatus(i)[0];
+				int numOfClashes = courses.slotStatus(i)[1];
+				int adequateNumOfCourses = courses.length()/Integer.parseInt(field[0].getText())
+
+				if (numOfCourses >=  adequateNumOfCourses &&  numOfClashes == 0){
+					// trains if that time slot has zero clashes, 
 					// and there are adequate number of courses in that timeslot
-					
 					autoAssociator.training(courses.getTimeSlot(i));
 				}
 			}
