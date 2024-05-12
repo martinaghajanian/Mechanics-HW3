@@ -125,7 +125,7 @@ public class TimeTable extends JFrame implements ActionListener {
 
 				int numOfCourses = courses.slotStatus(i)[0];
 				int numOfClashes = courses.slotStatus(i)[1];
-				int adequateNumOfCourses = courses.length()/Integer.parseInt(field[0].getText())
+				int adequateNumOfCourses = courses.length()/Integer.parseInt(field[0].getText());
 
 				if (numOfCourses >=  adequateNumOfCourses &&  numOfClashes == 0){
 					// trains if that time slot has zero clashes, 
