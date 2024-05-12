@@ -9,6 +9,8 @@ public class TimeTable extends JFrame implements ActionListener {
 	private JTextField field[];
 	private CourseArray courses;
 	private Color CRScolor[] = {Color.RED, Color.GREEN, Color.BLACK};
+
+	private Autoassociator autoAssociator = new Autoassociator(courses);
 	
 	public TimeTable() {
 		super("Dynamic Time Table");
@@ -117,8 +119,6 @@ public class TimeTable extends JFrame implements ActionListener {
 			}
 			break;
 		case 5:  // TRAIN BUTTON:
-			Autoassociator autoAssociator = new Autoassociator(courses);
-
 			int numOfSlots = Integer.parseInt(field[0].getText());
 
 			for (int i = 0; i < numOfSlots; i++) {
