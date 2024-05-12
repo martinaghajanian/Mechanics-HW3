@@ -116,7 +116,7 @@ public class TimeTable extends JFrame implements ActionListener {
 				}
 			}
 			break;
-		case 5:
+		case 5:  // TRAIN BUTTON:
 			Autoassociator autoAssociator = new Autoassociator(courses);
 
 			int numOfSlots = Integer.parseInt(field[0].getText());
