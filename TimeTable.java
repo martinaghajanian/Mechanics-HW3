@@ -120,6 +120,10 @@ public class TimeTable extends JFrame implements ActionListener {
 			Autoassociator autoAssociator = new Autoassociator(courses);
 			for (int i = 0; i < Integer.parseInt(field[0].getText()); i++) {
 				if (courses.slotStatus(i)[0] >= courses.length()/Integer.parseInt(field[0].getText()) &&  courses.slotStatus(i)[1] == 0){
+
+					// trains if the time slots in the current state, have zero clashes, 
+					// and there are adequate number of courses in that timeslot
+					
 					autoAssociator.training(courses.getTimeSlot(i));
 				}
 			}
