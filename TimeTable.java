@@ -10,7 +10,7 @@ public class TimeTable extends JFrame implements ActionListener {
 	private CourseArray courses;
 	private Color CRScolor[] = {Color.RED, Color.GREEN, Color.BLACK};
 
-	private Autoassociator autoAssociator = new Autoassociator(courses);
+	private Autoassociator autoAssociator;
 	
 	public TimeTable() {
 		super("Dynamic Time Table");
@@ -79,6 +79,9 @@ public class TimeTable extends JFrame implements ActionListener {
 			courses = new CourseArray(Integer.parseInt(field[1].getText()) + 1, slots);
 			courses.readClashes(field[2].getText());
 			draw();
+
+			autoAssociator = new Autoassociator(courses);
+
 			break;
 		case 1:
 			min = Integer.MAX_VALUE;
