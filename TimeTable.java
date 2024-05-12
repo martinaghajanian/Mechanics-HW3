@@ -28,7 +28,7 @@ public class TimeTable extends JFrame implements ActionListener {
 		String capField[] = {"Slots:", "Courses:", "Clash File:", "Iters:", "Shift:"};
 		field = new JTextField[capField.length];
 		
-		String capButton[] = {"Load", "Start", "Step", "Print", "Continue", "Exit"};
+		String capButton[] = {"Load", "Start", "Step", "Print", "Continue", "Train", "Exit"};
 		tool = new JButton[capButton.length];
 		
 		tools.setLayout(new GridLayout(2 * capField.length + capButton.length, 1));
@@ -117,6 +117,14 @@ public class TimeTable extends JFrame implements ActionListener {
 			}
 			break;
 		case 5:
+			Autoassociator autoAssociator = new Autoassociator(courses);
+			for (int i = 0; i < Integer.parseInt(field[0].getText()); i++) {
+				if (courses.slotStatus(i)[0] >= courses.length()/Integer.parseInt(field[0].getText()) &&  courses.slotStatus(i)[1] == 0){
+					autoAssociator.training(courses.getTimeSlot(i));
+				}
+			}
+			break;
+		case 6:
 			System.exit(0);
 		}
 	}
