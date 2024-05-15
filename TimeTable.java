@@ -47,10 +47,11 @@ public class TimeTable extends JFrame implements ActionListener {
 			tools.add(tool[i]);
 		}
 		
-		field[0].setText("19");
-		field[1].setText("181");
-		field[2].setText("yor-f-91.stu");
-		field[3].setText("1");
+		field[0].setText("21");
+		field[1].setText("486");
+		field[2].setText("rye-s-93.stu");
+		field[3].setText("1000");
+		field[4].setText("21");
 	}
 	
 	public void draw() {
