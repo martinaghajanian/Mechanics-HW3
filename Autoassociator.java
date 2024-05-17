@@ -52,7 +52,16 @@ public class Autoassociator {
 	}
 	
 	public void fullUpdate(int neurons[]) {
-		// TO DO
-		// updates the input until the final state achieved
+		boolean stable;
+        do {
+            stable = true;
+            for (int i = 0; i < neurons.length; i++) {
+                int oldState = neurons[i];
+                unitUpdate(neurons, i);
+                if (neurons[i] != oldState) {
+                    stable = false;
+                }
+            }
+        } while (!stable);
 	}
 }
