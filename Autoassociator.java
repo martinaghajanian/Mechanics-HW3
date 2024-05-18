@@ -29,7 +29,7 @@ public class Autoassociator {
 	public void unitUpdate(int neurons[], int index) {
 		int sum = 0;
 		for (int i = 0; i < neurons.length; i++) {
-			sum += weights[index][1] * neurons [i];
+			sum += weights[index][i] * neurons [i];
 		}
 
 		if (sum >= 0) {
