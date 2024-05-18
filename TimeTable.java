@@ -190,15 +190,13 @@ public class TimeTable extends JFrame implements ActionListener {
 
 				int iter = 0;
 
-				if (numOfCourses >=  adequateNumOfCourses &&  numOfClashes == 0){
-					// trains if that time slot has zero clashes, and there are adequate number of courses in that timeslot
-					
-					int[] pattern = courses.getTimeSlot(i);
-					
-					if (iter < trainingCapacity) {
+				if (iter > trainingCapacity) {
+					System.out.println("Training capacity reached.");
+				} else {
+					if (numOfCourses >=  adequateNumOfCourses &&  numOfClashes == 0) {
+						int[] pattern = courses.getTimeSlot(i);
 						autoAssociator.training(pattern);
 						iter++;
-						System.out.println("trained");
 					}
 				}
 			}
