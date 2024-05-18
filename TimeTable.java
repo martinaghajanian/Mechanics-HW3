@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
+
 import javax.swing.*;
+
 
 public class TimeTable extends JFrame implements ActionListener {
 
@@ -11,6 +14,7 @@ public class TimeTable extends JFrame implements ActionListener {
 	private Color CRScolor[] = {Color.RED, Color.GREEN, Color.BLACK};
 
 	private Autoassociator autoAssociator;
+	private Random random = new Random();
 	
 	public TimeTable() {
 		super("Dynamic Time Table");
@@ -33,7 +37,7 @@ public class TimeTable extends JFrame implements ActionListener {
 		String capField[] = {"Slots:", "Courses:", "Clash File:", "Iters:", "Shift:"};
 		field = new JTextField[capField.length];
 		
-		String capButton[] = {"Load", "Start", "Step", "Print", "Continue", "Train", "Exit"};
+		String capButton[] = {"Load", "Start", "Update","Step", "Print", "Continue", "Train", "Exit"};
 		tool = new JButton[capButton.length];
 		
 		tools.setLayout(new GridLayout(2 * capField.length + capButton.length, 1));
@@ -53,7 +57,7 @@ public class TimeTable extends JFrame implements ActionListener {
 		field[0].setText("21");
 		field[1].setText("486");
 		field[2].setText("rye-s-93.stu");
-		field[3].setText("1000");
+		field[3].setText("100");
 		field[4].setText("21");
 
 	}
@@ -88,12 +92,15 @@ public class TimeTable extends JFrame implements ActionListener {
 			autoAssociator = new Autoassociator(courses);
 			
 			break;
+		
 		case 1:
 			min = Integer.MAX_VALUE;
 			step = 0;
 
 			for (int i = 1; i < courses.length(); i++) 
 				courses.setSlot(i, 0);
+			
+			
 			
 			for (int iteration = 1; iteration <= Integer.parseInt(field[3].getText()); iteration++) {
 				courses.iterate(Integer.parseInt(field[4].getText()));
@@ -104,32 +111,73 @@ public class TimeTable extends JFrame implements ActionListener {
 					step = iteration;
 				}
 			}
-
+				
 			
+			
+				
 			System.out.println("Shift = " + field[4].getText() + "\tMin clashes = " + min + "\tat step " + step);
 			setVisible(true);
 			courses.printSlotStatus();
 			break;
+		
 		case 2:
+			min = Integer.MAX_VALUE;
+			step = 0;
+
+			for (int i = 1; i < courses.length(); i++) 
+				courses.setSlot(i, 0);
+			
+			int cycles = 1;
+			for (int cycle = 1; cycle <= cycles; cycles++) {
+				for (int iteration = 1; iteration <= Integer.parseInt(field[3].getText()); iteration++) {
+					courses.iterate(Integer.parseInt(field[4].getText()));
+					draw();
+					clashes = courses.clashesLeft();
+					if (clashes < min) {
+						min = clashes;
+						step = iteration;
+					}
+					int rand = Integer.parseInt(field[0].getText());
+					autoAssociator.unitUpdate(courses.getTimeSlot(random.nextInt(rand)));
+
+				}
+				
+			}
+			
+				
+			System.out.println("Shift = " + field[4].getText() + "\tMin clashes = " + min + "\tat step " + step);
+			setVisible(true);
+			courses.printSlotStatus();
+			break;
+		case 3:
 			courses.iterate(Integer.parseInt(field[4].getText()));
 			draw();
 			break;
-		case 3:
+		case 4:
 			System.out.println("Exam\tSlot\tClashes");
 			for (int i = 1; i < courses.length(); i++)
 				System.out.println(i + "\t" + courses.slot(i) + "\t" + courses.status(i));
 			break;
-		case 4:   // Continue button
-			
-			int numOfSlotss = Integer.parseInt(field[0].getText());
-			for (int i = 0; i < numOfSlotss; i++) {
-				int[] pattern = courses.getTimeSlot(i);
-				autoAssociator.unitUpdate(pattern, i);
-				updateCoursesFromPattern(pattern, i);
-			}
+		case 5:
+		min = Integer.MAX_VALUE;
+		step = 0;
+		
+		for (int iteration = 1; iteration <= Integer.parseInt(field[3].getText()); iteration++) {
+			courses.iterate(Integer.parseInt(field[4].getText()));
 			draw();
-			break;
-		case 5:  // TRAIN BUTTON:
+			clashes = courses.clashesLeft();
+			if (clashes < min) {
+				min = clashes;
+				step = iteration;
+			}
+		}
+
+		
+		System.out.println("Shift = " + field[4].getText() + "\tMin clashes = " + min + "\tat step " + step);
+		setVisible(true);
+		courses.printSlotStatus();
+		break;
+		case 6:  // TRAIN BUTTON:
 
 			int numOfSlots = Integer.parseInt(field[0].getText());
 
@@ -138,28 +186,27 @@ public class TimeTable extends JFrame implements ActionListener {
 				int numOfCourses = courses.slotStatus(i)[0];
 				int numOfClashes = courses.slotStatus(i)[1];
 				int adequateNumOfCourses = courses.length()/Integer.parseInt(field[0].getText());
+				int trainingCapacity = autoAssociator.getTrainingCapacity();
+
+				int iter = 0;
 
 				if (numOfCourses >=  adequateNumOfCourses &&  numOfClashes == 0){
 					// trains if that time slot has zero clashes, and there are adequate number of courses in that timeslot
 					
 					int[] pattern = courses.getTimeSlot(i);
 					
-					autoAssociator.training(pattern);
+					if (iter < trainingCapacity) {
+						autoAssociator.training(pattern);
+						iter++;
+						System.out.println("trained");
+					}
 				}
 			}
 			break;
-		case 6:
+		case 7:
 			System.exit(0);
 		}
 	}
-
-	private void updateCoursesFromPattern(int[] pattern, int timeSlot) {
-        for (int i = 1; i < pattern.length; i++) {
-            if (pattern[i] == 1) {
-                courses.setSlot(i, timeSlot);
-            }
-        }
-    }
 
 	public static void main(String[] args) {
 		new TimeTable();
