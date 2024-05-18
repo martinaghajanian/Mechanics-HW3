@@ -1,3 +1,5 @@
+trains if that time slot has zero clashes, and there are adequate number of courses in that timeslot, so the train button trains based on the pattern below  based on the mentioned criteria.
+
 FOR CLASH FILE yor-f-83:
 
 Shift = 19      Min clashes = 324       at step 1
