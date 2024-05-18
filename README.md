@@ -1,5 +1,7 @@
 Martin Aghajanian
 
+clash files: yor-f-83 (Topt = 19 slots) and rye-s-93 (Topt = 21 slots)
+
 
 task 1, 2, 3, 4, 5 completed
 
