@@ -15,6 +15,8 @@ public class TimeTable extends JFrame implements ActionListener {
 
 	private Autoassociator autoAssociator;
 	private Random random = new Random();
+	private	int trainIter = 0;
+
 	
 	public TimeTable() {
 		super("Dynamic Time Table");
@@ -54,11 +56,11 @@ public class TimeTable extends JFrame implements ActionListener {
 			tools.add(tool[i]);
 		}
 		
-		field[0].setText("21");
-		field[1].setText("486");
-		field[2].setText("rye-s-93.stu");
-		field[3].setText("100");
-		field[4].setText("21");
+		field[0].setText("19");
+		field[1].setText("181");
+		field[2].setText("yor-f-83.stu");
+		field[3].setText("10000");
+		field[4].setText("19");
 
 	}
 	
@@ -83,7 +85,7 @@ public class TimeTable extends JFrame implements ActionListener {
 		int min, step, clashes;
 		
 		switch (getButtonIndex((JButton) click.getSource())) {
-		case 0:
+		case 0: // Load:
 			int slots = Integer.parseInt(field[0].getText());
 			courses = new CourseArray(Integer.parseInt(field[1].getText()) + 1, slots);
 			courses.readClashes(field[2].getText());
@@ -93,7 +95,7 @@ public class TimeTable extends JFrame implements ActionListener {
 			
 			break;
 		
-		case 1:
+		case 1:  // Start:
 			min = Integer.MAX_VALUE;
 			step = 0;
 
@@ -120,7 +122,7 @@ public class TimeTable extends JFrame implements ActionListener {
 			courses.printSlotStatus();
 			break;
 		
-		case 2:
+		case 2: // Update
 			min = Integer.MAX_VALUE;
 			step = 0;
 
@@ -149,16 +151,16 @@ public class TimeTable extends JFrame implements ActionListener {
 			setVisible(true);
 			courses.printSlotStatus();
 			break;
-		case 3:
+		case 3:  // Step
 			courses.iterate(Integer.parseInt(field[4].getText()));
 			draw();
 			break;
-		case 4:
+		case 4:  // Print
 			System.out.println("Exam\tSlot\tClashes");
 			for (int i = 1; i < courses.length(); i++)
 				System.out.println(i + "\t" + courses.slot(i) + "\t" + courses.status(i));
 			break;
-		case 5:
+		case 5: // Continue:
 		min = Integer.MAX_VALUE;
 		step = 0;
 		
@@ -177,10 +179,10 @@ public class TimeTable extends JFrame implements ActionListener {
 		setVisible(true);
 		courses.printSlotStatus();
 		break;
-		case 6:  // TRAIN BUTTON:
+		case 6:  // Train:
 
 			int numOfSlots = Integer.parseInt(field[0].getText());
-
+			
 			for (int i = 0; i < numOfSlots; i++) {
 
 				int numOfCourses = courses.slotStatus(i)[0];
@@ -188,20 +190,21 @@ public class TimeTable extends JFrame implements ActionListener {
 				int adequateNumOfCourses = courses.length()/Integer.parseInt(field[0].getText());
 				int trainingCapacity = autoAssociator.getTrainingCapacity();
 
-				int iter = 0;
-
-				if (iter > trainingCapacity) {
+				
+				
+				if (trainIter > trainingCapacity) {
 					System.out.println("Training capacity reached.");
 				} else {
 					if (numOfCourses >=  adequateNumOfCourses &&  numOfClashes == 0) {
 						int[] pattern = courses.getTimeSlot(i);
 						autoAssociator.training(pattern);
-						iter++;
+						System.out.println(trainIter);
+						trainIter++;
 					}
 				}
 			}
 			break;
-		case 7:
+		case 7: // Exit:
 			System.exit(0);
 		}
 	}
