@@ -119,13 +119,13 @@ public class TimeTable extends JFrame implements ActionListener {
 			for (int i = 1; i < courses.length(); i++)
 				System.out.println(i + "\t" + courses.slot(i) + "\t" + courses.status(i));
 			break;
-		case 4:
-			// Continue button logic
+		case 4:   // Continue button
+			
 			int numOfSlotss = Integer.parseInt(field[0].getText());
 			for (int i = 0; i < numOfSlotss; i++) {
 				int[] pattern = courses.getTimeSlot(i);
-				autoAssociator.unitUpdate(pattern, i); // Perform unit updates
-				updateCoursesFromPattern(pattern, i); // Update courses based on the pattern
+				autoAssociator.unitUpdate(pattern, i);
+				updateCoursesFromPattern(pattern, i);
 			}
 			draw();
 			break;
